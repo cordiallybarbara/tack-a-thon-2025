@@ -133,7 +133,12 @@ function show72Prize() {
 // 100-click prize: disable button and change text
 function lockButton() {
   chaosButton.disabled = true;
-  chaosButton.textContent = "you're extremely bad at following instructions.";
+  chaosButton.textContent = "Claimed: Certified Menace Award";
+
+  showOverlay(
+    "💀 SYSTEM FAILURE 💀",
+    "Best viewed in Netscape. Worst behaved in reality."
+  );
 }
 
 // Main click handler
