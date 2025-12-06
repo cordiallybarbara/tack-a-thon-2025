@@ -36,19 +36,20 @@ if (chaosButton) {
   });
 }
 const countDisplay = document.getElementById("click-count");
-
 let clickCount = localStorage.getItem("doNotClickCount");
 
 if (!clickCount) {
   clickCount = 0;
+} else {
+  countDisplay.style.display = "block";
+  countDisplay.textContent = `You failed… ${clickCount} times.`;
 }
-
-countDisplay.textContent = `You have failed… ${clickCount} times.`;
 
 chaosButton.addEventListener("click", function () {
   clickCount++;
   localStorage.setItem("doNotClickCount", clickCount);
 
+  countDisplay.style.display = "block";
   countDisplay.textContent = `You failed… ${clickCount} times.`;
 });
 
