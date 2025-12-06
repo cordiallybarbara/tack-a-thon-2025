@@ -35,3 +35,39 @@ if (chaosButton) {
     }
   });
 }
+const meterFill = document.querySelector(".meter-fill");
+const statusText = document.querySelector(".naughty-nice p");
+
+let bounceInterval;
+let settled = false;
+
+function startMeterChaos() {
+  bounceInterval = setInterval(() => {
+    const randomWidth = Math.floor(Math.random() * 80) + 10; // 10% to 90%
+    meterFill.style.width = randomWidth + "%";
+  }, 200);
+
+  // Stop after 8 seconds
+  setTimeout(settleMeter, 8000);
+}
+
+function settleMeter() {
+  clearInterval(bounceInterval);
+
+  const result = Math.random() > 0.5 ? "nice" : "naughty";
+
+  if (result === "nice") {
+    meterFill.style.width = "95%";
+    meterFill.style.background = "linear-gradient(to right, gold, lime)";
+    statusText.textContent = "RESULT: ✅ SUPER NICE";
+  } else {
+    meterFill.style.width = "10%";
+    meterFill.style.background = "linear-gradient(to right, darkred, red)";
+    statusText.textContent = "RESULT: 🚨 VERY NAUGHTY";
+  }
+
+  settled = true;
+}
+
+// Start the meter when the page loads
+startMeterChaos();
