@@ -1,0 +1,59 @@
+body {
+  background-image: repeating-linear-gradient(
+    45deg,
+    red,
+    red 10px,
+    green 10px,
+    green 20px
+  );
+  color: yellow;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 20px;
+}
+
+h1 {
+  text-shadow: 4px 4px purple;
+  animation: blink 0.7s infinite;
+  font-size: 3rem;
+}
+
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.naughty-nice {
+  margin-top: 40px;
+}
+
+.meter {
+  width: 80%;
+  max-width: 400px;
+  margin: 0 auto;
+  height: 30px;
+  border: 4px ridge gold;
+  background: black;
+}
+
+.meter-fill {
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(to right, red, orange, yellow);
+  animation: wiggle 1.2s infinite;
+}
+
+@keyframes wiggle {
+  0% { width: 55%; }
+  50% { width: 70%; }
+  100% { width: 60%; }
+}
+
+.elf-chat {
+  margin-top: 40px;
+  padding: 20px;
+  border: 5px double cyan;
+  background: rgba(0, 0, 0, 0.7);
+}
