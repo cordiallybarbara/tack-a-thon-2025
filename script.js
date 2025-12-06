@@ -161,6 +161,47 @@ if (clickCount >= 9 && !prize9Shown) {
   });
 }
 
+const elfButton = document.getElementById("generate-elf-name");
+const elfOutput = document.getElementById("elf-name-output");
+
+if (elfButton && elfOutput) {
+  const elfFirstParts = [
+    "Glitter",
+    "Jingle",
+    "Snowy",
+    "Turbo",
+    "Pixel",
+    "Candy",
+    "Frosty",
+    "Twinkle",
+    "Cookie",
+    "Sparkle"
+  ];
+
+  const elfLastParts = [
+    "McSnowpants",
+    "Sugarplum",
+    "Fizzlebell",
+    "Tinseltoes",
+    "Gadgethands",
+    "Jollycog",
+    "Snowcircuit",
+    "Nutmegbyte",
+    "Hollywhistle",
+    "Nogwrench"
+  ];
+
+  elfButton.addEventListener("click", function () {
+    const first =
+      elfFirstParts[Math.floor(Math.random() * elfFirstParts.length)];
+    const last =
+      elfLastParts[Math.floor(Math.random() * elfLastParts.length)];
+
+    elfOutput.textContent = `Your official elf name: ${first} ${last}`;
+  });
+}
+
+
 const meterFill = document.querySelector(".meter-fill");
 const statusText = document.querySelector(".status-text");
 

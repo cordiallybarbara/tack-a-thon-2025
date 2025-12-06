@@ -208,4 +208,33 @@ a {
   font-family: monospace;
   cursor: pointer;
 }
+.elf-name-lab {
+  margin-top: 40px;
+  padding: 20px;
+  border: 4px groove #00ffcc;
+  background: rgba(0, 0, 0, 0.8);
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.elf-name-lab h2 {
+  margin-top: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#generate-elf-name {
+  margin-top: 10px;
+  padding: 8px 16px;
+  font-size: 1rem;
+  background: #00ffcc;
+  border: 3px solid #ff00ff;
+  cursor: pointer;
+}
+
+#elf-name-output {
+  margin-top: 15px;
+  font-size: 1.1rem;
+  font-family: monospace;
+}
 
