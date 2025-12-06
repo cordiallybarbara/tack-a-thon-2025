@@ -83,10 +83,15 @@ h1 {
   border: 4px dashed red;
   cursor: pointer;
 }
-@keyframes chaos-bg {
-  0% { background-color: red; }
-  25% { background-color: green; }
-  50% { background-color: blue; }
-  75% { background-color: purple; }
-  100% { background-color: red; }
+.status-text {
+  margin-top: 14px;
+  font-size: 1.1rem;
+  font-family: monospace;
+  color: #00ffcc;
+  background: #001a1a;
+  display: inline-block;
+  padding: 6px 10px;
+  border: 2px solid #00ffcc;
+  letter-spacing: 0.05em;
+  opacity: 0.9;
 }

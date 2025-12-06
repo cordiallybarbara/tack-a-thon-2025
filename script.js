@@ -36,7 +36,7 @@ if (chaosButton) {
   });
 }
 const meterFill = document.querySelector(".meter-fill");
-const statusText = document.querySelector(".naughty-nice p");
+const statusText = document.querySelector(".status-text");
 
 const messages = [
   "Scanning stocking history...",
