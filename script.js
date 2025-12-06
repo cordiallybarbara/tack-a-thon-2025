@@ -38,14 +38,35 @@ if (chaosButton) {
 const meterFill = document.querySelector(".meter-fill");
 const statusText = document.querySelector(".naughty-nice p");
 
+const messages = [
+  "Scanning stocking history...",
+  "Cross-referencing elf reports...",
+  "Checking cookie consumption...",
+  "Verifying reindeer interactions...",
+  "Analyzing holiday attitude...",
+  "Decrypting wish list...",
+  "Consulting Mrs. Claus...",
+  "Replaying mall Santa footage...",
+  "Calculating sparkle levels...",
+  "Loading emotional intelligence..."
+];
+
 let bounceInterval;
-let settled = false;
+let messageInterval;
 
 function startMeterChaos() {
+  // Bouncing meter
   bounceInterval = setInterval(() => {
-    const randomWidth = Math.floor(Math.random() * 80) + 10; // 10% to 90%
+    const randomWidth = Math.floor(Math.random() * 80) + 10;
     meterFill.style.width = randomWidth + "%";
   }, 200);
+
+  // Rotate messages every second
+  let msgIndex = 0;
+  messageInterval = setInterval(() => {
+    statusText.textContent = messages[msgIndex];
+    msgIndex = (msgIndex + 1) % messages.length;
+  }, 1000);
 
   // Stop after 8 seconds
   setTimeout(settleMeter, 8000);
@@ -53,6 +74,7 @@ function startMeterChaos() {
 
 function settleMeter() {
   clearInterval(bounceInterval);
+  clearInterval(messageInterval);
 
   const result = Math.random() > 0.5 ? "nice" : "naughty";
 
@@ -65,9 +87,7 @@ function settleMeter() {
     meterFill.style.background = "linear-gradient(to right, darkred, red)";
     statusText.textContent = "RESULT: 🚨 VERY NAUGHTY";
   }
-
-  settled = true;
 }
 
-// Start the meter when the page loads
+// Start
 startMeterChaos();
