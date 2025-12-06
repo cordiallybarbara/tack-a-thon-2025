@@ -57,3 +57,36 @@ h1 {
   border: 5px double cyan;
   background: rgba(0, 0, 0, 0.7);
 }
+
+.tacky-popup {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: magenta;
+  color: white;
+  border: 6px outset yellow;
+  padding: 20px;
+  z-index: 9999;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  box-shadow: 8px 8px 0 black;
+}
+.danger-zone {
+  margin-top: 40px;
+}
+
+#do-not-click {
+  font-size: 1.2rem;
+  padding: 10px 20px;
+  background: black;
+  color: red;
+  border: 4px dashed red;
+  cursor: pointer;
+}
+@keyframes chaos-bg {
+  0% { background-color: red; }
+  25% { background-color: green; }
+  50% { background-color: blue; }
+  75% { background-color: purple; }
+  100% { background-color: red; }
+}
