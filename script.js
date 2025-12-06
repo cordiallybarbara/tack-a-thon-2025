@@ -5,14 +5,24 @@ function showCandyPopup() {
   popup.className = "tacky-popup";
   popup.innerHTML = `
     🎁 <strong>CONGRATS!</strong> You have won <span style="text-decoration: underline;">10,000 virtual candy canes</span>!<br>
-    <button id="close-popup">No thanks, this seems legit</button>
+    <button class="close-popup">No thanks, this seems legit</button>
   `;
 
   document.body.appendChild(popup);
 
-  document.getElementById("close-popup").onclick = function () {
+  const closeBtn = popup.querySelector(".close-popup");
+
+  if (closeBtn) {
+    closeBtn.addEventListener("click", function (event) {
+      event.stopPropagation();
+      popup.remove();
+    });
+  }
+
+  // Optional: clicking anywhere on the popup closes it too
+  popup.addEventListener("click", function () {
     popup.remove();
-  };
+  });
 }
 
 // Show the first popup after 5 seconds
