@@ -1,5 +1,24 @@
 console.log("Santa's script.js is loaded and ready to be tacky.");
 
+function showOverlay(title, message) {
+  const overlay = document.createElement("div");
+  overlay.className = "reward-overlay";
+  overlay.innerHTML = `
+    <div class="reward-box">
+      <h2>${title}</h2>
+      <p>${message}</p>
+      <button id="close-overlay">Continue</button>
+    </div>
+  `;
+
+  document.body.appendChild(overlay);
+
+  document.getElementById("close-overlay").addEventListener("click", () => {
+    overlay.remove();
+  });
+}
+
+
 function showCandyPopup() {
   const popup = document.createElement("div");
   popup.className = "tacky-popup";
@@ -43,13 +62,10 @@ let prize9Shown = false;
 
 function show9Prize() {
   prize9Shown = true;
-
-  const toast = document.createElement("div");
-  toast.className = "toast";
-  toast.textContent = "🏆 Achievement unlocked: You clearly ignore warning labels.";
-  document.body.appendChild(toast);
-
-  setTimeout(() => toast.remove(), 3200);
+  showOverlay(
+    "🏆 Achievement Unlocked",
+    "You have clicked 9 times. Instruction-following is clearly optional for you."
+  );
 }
 
 
@@ -60,6 +76,12 @@ if (clickCount > 0 && countDisplay) {
 }
 
 // 40-click prize: start snowflakes
+function show40Prize() {
+  showOverlay(
+    "❄ SNOW MODE UNLOCKED ❄",
+    "You clicked 40 times. The North Pole server has unleashed decorative chaos."
+  );
+}
 function startSnow() {
   snowStarted = true;
 
@@ -67,6 +89,8 @@ function startSnow() {
     const snowflake = document.createElement("div");
     snowflake.className = "snowflake";
     snowflake.textContent = "❄";
+snowflake.style.fontSize = "40px";
+
 
     snowflake.style.left = Math.random() * 100 + "vw";
     snowflake.style.animationDuration = 5 + Math.random() * 5 + "s";
@@ -81,20 +105,10 @@ function startSnow() {
 // 72-click prize: show secret message
 function show72Prize() {
   prize72Shown = true;
-
-  const popup = document.createElement("div");
-  popup.className = "prize-popup";
-  popup.innerHTML = `
-    <h3>🎄 SECRET 72-CLICK CLUB 🎄</h3>
-    <p>You have achieved a truly unnecessary level of commitment.</p>
-    <p>Santa's QA team is both impressed and concerned.</p>
-    <button id="close-prize">OK, I accept this honor</button>
-  `;
-
-  document.body.appendChild(popup);
-
-  const closeBtn = document.getElementById("close-prize");
-  closeBtn.addEventListener("click", () => popup.remove());
+  showOverlay(
+    "🎄 SECRET 72-CLICK CLUB",
+    "You have achieved a truly unnecessary level of dedication. Santa’s QA team is impressed and mildly alarmed."
+  );
 }
 
 // 100-click prize: disable button and change text
@@ -131,9 +145,11 @@ if (clickCount >= 9 && !prize9Shown) {
   show9Prize();
 }
 
-    if (clickCount >= 40 && !snowStarted) {
-      startSnow();
-    }
+   if (clickCount >= 40 && !snowStarted) {
+  startSnow();
+  show40Prize();
+}
+
 
     if (clickCount >= 72 && !prize72Shown) {
       show72Prize();
