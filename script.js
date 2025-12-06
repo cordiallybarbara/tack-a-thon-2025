@@ -7,15 +7,34 @@ function showOverlay(title, message) {
     <div class="reward-box">
       <h2>${title}</h2>
       <p>${message}</p>
-      <button id="close-overlay">Continue</button>
+      <button class="close-overlay">Continue</button>
     </div>
   `;
 
   document.body.appendChild(overlay);
 
-  document.getElementById("close-overlay").addEventListener("click", () => {
+  const closeOverlay = () => {
     overlay.remove();
+    document.removeEventListener("keydown", escHandler);
+  };
+
+  // Close when clicking button
+  overlay.querySelector(".close-overlay").addEventListener("click", closeOverlay);
+
+  // Close when clicking dark background (not the box)
+  overlay.addEventListener("click", function (e) {
+    if (e.target === overlay) {
+      closeOverlay();
+    }
   });
+
+  // Close with ESC key
+  const escHandler = (e) => {
+    if (e.key === "Escape") {
+      closeOverlay();
+    }
+  };
+  document.addEventListener("keydown", escHandler);
 }
 
 

@@ -179,7 +179,8 @@ a {
   text-transform: none;
 }
 .reward-overlay {
-  position: fixed;
+pointer-events: auto;  
+position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.85);
   color: #00ffcc;
