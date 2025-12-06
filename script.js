@@ -35,6 +35,23 @@ if (chaosButton) {
     }
   });
 }
+const countDisplay = document.getElementById("click-count");
+
+let clickCount = localStorage.getItem("doNotClickCount");
+
+if (!clickCount) {
+  clickCount = 0;
+}
+
+countDisplay.textContent = `You have failed… ${clickCount} times.`;
+
+chaosButton.addEventListener("click", function () {
+  clickCount++;
+  localStorage.setItem("doNotClickCount", clickCount);
+
+  countDisplay.textContent = `You failed… ${clickCount} times.`;
+});
+
 const meterFill = document.querySelector(".meter-fill");
 const statusText = document.querySelector(".status-text");
 
