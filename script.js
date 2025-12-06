@@ -22,36 +22,118 @@ setTimeout(showCandyPopup, 5000);
 setInterval(showCandyPopup, 20000);
 
 const chaosButton = document.getElementById("do-not-click");
+const countDisplay = document.getElementById("click-count");
 
+let clickCount = parseInt(localStorage.getItem("doNotClickCount") || "0", 10);
+
+// Flags so we only trigger each prize once per page load
+let snowStarted = false;
+let prize72Shown = false;
+let prize9Shown = false;
+
+function show9Prize() {
+  prize9Shown = true;
+
+  const toast = document.createElement("div");
+  toast.className = "toast";
+  toast.textContent = "🏆 Achievement unlocked: You clearly ignore warning labels.";
+  document.body.appendChild(toast);
+
+  setTimeout(() => toast.remove(), 3200);
+}
+
+
+// If there is already a count from before, show it
+if (clickCount > 0 && countDisplay) {
+  countDisplay.style.display = "block";
+  countDisplay.textContent = `You failed… ${clickCount} times.`;
+}
+
+// 40-click prize: start snowflakes
+function startSnow() {
+  snowStarted = true;
+
+  for (let i = 0; i < 30; i++) {
+    const snowflake = document.createElement("div");
+    snowflake.className = "snowflake";
+    snowflake.textContent = "❄";
+
+    snowflake.style.left = Math.random() * 100 + "vw";
+    snowflake.style.animationDuration = 5 + Math.random() * 5 + "s";
+    snowflake.style.animationDelay = Math.random() * 5 + "s";
+
+    document.body.appendChild(snowflake);
+  }
+
+  console.log("Snow mode activated at 40 clicks!");
+}
+
+// 72-click prize: show secret message
+function show72Prize() {
+  prize72Shown = true;
+
+  const popup = document.createElement("div");
+  popup.className = "prize-popup";
+  popup.innerHTML = `
+    <h3>🎄 SECRET 72-CLICK CLUB 🎄</h3>
+    <p>You have achieved a truly unnecessary level of commitment.</p>
+    <p>Santa's QA team is both impressed and concerned.</p>
+    <button id="close-prize">OK, I accept this honor</button>
+  `;
+
+  document.body.appendChild(popup);
+
+  const closeBtn = document.getElementById("close-prize");
+  closeBtn.addEventListener("click", () => popup.remove());
+}
+
+// 100-click prize: disable button and change text
+function lockButton() {
+  chaosButton.disabled = true;
+  chaosButton.textContent = "you're extremely bad at following instructions.";
+}
+
+// Main click handler
 if (chaosButton) {
   chaosButton.addEventListener("click", function () {
-    alert("You were explicitly told not to click that.");
+    if (chaosButton.disabled) return;
 
+    // Original chaos behavior (optional, keep or remove)
+    alert("You were explicitly told not to click that.");
     document.body.style.animation = "chaos-bg 0.5s infinite";
 
     const headline = document.querySelector("h1");
     if (headline) {
       headline.textContent = "SANTA'S DIAL-UP DASHBOARD: CHAOS MODE ACTIVATED";
     }
+
+    // Update count
+    clickCount++;
+    localStorage.setItem("doNotClickCount", clickCount);
+
+    if (countDisplay) {
+      countDisplay.style.display = "block";
+      countDisplay.textContent = `You failed… ${clickCount} times.`;
+    }
+
+    // Milestones
+if (clickCount >= 9 && !prize9Shown) {
+  show9Prize();
+}
+
+    if (clickCount >= 40 && !snowStarted) {
+      startSnow();
+    }
+
+    if (clickCount >= 72 && !prize72Shown) {
+      show72Prize();
+    }
+
+    if (clickCount >= 100) {
+      lockButton();
+    }
   });
 }
-const countDisplay = document.getElementById("click-count");
-let clickCount = localStorage.getItem("doNotClickCount");
-
-if (!clickCount) {
-  clickCount = 0;
-} else {
-  countDisplay.style.display = "block";
-  countDisplay.textContent = `You failed… ${clickCount} times.`;
-}
-
-chaosButton.addEventListener("click", function () {
-  clickCount++;
-  localStorage.setItem("doNotClickCount", clickCount);
-
-  countDisplay.style.display = "block";
-  countDisplay.textContent = `You failed… ${clickCount} times.`;
-});
 
 const meterFill = document.querySelector(".meter-fill");
 const statusText = document.querySelector(".status-text");

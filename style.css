@@ -98,3 +98,69 @@ h1 {
 #click-count {
   display: none;
 }
+/* Hide count by default (if not already there) */
+#click-count {
+  display: none;
+}
+
+/* Snowflakes */
+.snowflake {
+  position: fixed;
+  top: -50px;
+  font-size: 24px;
+  color: #ffffff;
+  pointer-events: none;
+  animation-name: fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  z-index: 999;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh);
+    opacity: 0.5;
+  }
+}
+
+/* 72-click prize popup */
+.prize-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #110022;
+  color: #ffccff;
+  padding: 20px 30px;
+  border: 4px solid #ffccff;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  text-align: center;
+  z-index: 10000;
+  box-shadow: 0 0 20px #ff00ff;
+}
+.toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #111;
+  color: #00ffcc;
+  border: 2px solid #00ffcc;
+  padding: 8px 14px;
+  font-family: monospace;
+  z-index: 10001;
+  opacity: 0;
+  animation: toastIn 0.4s forwards, toastOut 0.4s 2.6s forwards;
+}
+
+@keyframes toastIn {
+  to { opacity: 1; }
+}
+@keyframes toastOut {
+  to { opacity: 0; }
+}
+
